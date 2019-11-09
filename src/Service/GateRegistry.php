@@ -16,7 +16,7 @@ class GateRegistry
     /** @var array */
     protected $disabled;
 
-    protected const PREFIX = 'sms.send.disabled.1';
+    protected const PREFIX = 'sms.service.disabled.';
 
     public function __construct(array $gates, CacheItemPoolInterface $cache, array $disabled)
     {
@@ -29,7 +29,8 @@ class GateRegistry
      * @return GateInterface|null
      * @throws \Psr\Cache\InvalidArgumentException
      */
-    public function select() : ?GateInterface {
+    public function get() : ?GateInterface
+    {
         foreach($this->gates as $name => $gate) {
             if ($this->isDisabled($name)) {
                 continue;
@@ -39,10 +40,10 @@ class GateRegistry
         return null;
     }
 
-    public function disable(GateInterface $gate, int $minutes = 15) {
-
+    public function disable(GateInterface $gate, int $minutes = 15)
+    {
         $name = array_search($gate, $this->gates);
-        $item  = $this->cache->getItem(self::PREFIX . $name);
+        $item = $this->cache->getItem(self::PREFIX . $name);
         $item->expiresAfter($minutes * 60);
         $item->set($name);
         $this->cache->save($item);
