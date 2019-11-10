@@ -1,4 +1,7 @@
 .idea
+bin/phpcbf
+bin/phpcs
+bin/simple-phpunit
 
 ###> symfony/framework-bundle ###
 /.env.local
