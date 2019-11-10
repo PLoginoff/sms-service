@@ -14,6 +14,7 @@ See `.env` for possible settings.
 Installing:
  - `composer install`
  - `bin/simple-phpunit`
+ - set up your logins & passwords in `.env.*`
 
 Real tests — send sms to yourself:
  - `bin/console sms:send 9260613031 "Hi!" --gate=intel`
