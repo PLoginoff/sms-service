@@ -10,12 +10,16 @@ See `.env` for possible settings.
 Algorithm:
   - if it wasn’t possible to send via first gate, then mark it temporarily as a non-working one and take the next one
 
-Real tests:
+Installing:
+ - `composer install`
+ - `bin/simple-phpunit`
+
+Real tests — send sms to yourself:
  - `bin/console sms:send 9260613031 "Hi!" --gate=intel`
  - `bin/console sms:send 9260613031 "Hi!" --gate=easy`
 
 Unit tests:
- - `bin/phpunit`
+ - `bin/simple-phpunit`
  
 Run consumer:
  - `bin/console messenger:consume sms.send -vv`
