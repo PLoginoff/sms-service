@@ -22,16 +22,20 @@ class GateRegistry
     {
         $this->cache = $cache;
         $this->gates = $gates;
-        $this->disabled = $disabled;
+        $this->disabled = array_combine($disabled, $disabled);
     }
 
     /**
+     * @param string|null $name
      * @return GateInterface|null
      * @throws \Psr\Cache\InvalidArgumentException
      */
-    public function get() : ?GateInterface
+    public function get(?string $name = null): ?GateInterface
     {
-        foreach($this->gates as $name => $gate) {
+        if ($name) {
+            return $this->gates[$name];
+        }
+        foreach ($this->gates as $name => $gate) {
             if ($this->isDisabled($name)) {
                 continue;
             }
@@ -54,7 +58,7 @@ class GateRegistry
      * @return bool
      * @throws \Psr\Cache\InvalidArgumentException
      */
-    protected function isDisabled(string $name) : bool
+    protected function isDisabled(string $name): bool
     {
         if (isset($this->disabled[$name]) || $this->cache->hasItem(self::PREFIX . $name)) {
             return true;

@@ -8,16 +8,19 @@
         "ext-json": "*",
         "enqueue/amqp-lib": "^0.9.12",
         "enqueue/enqueue-bundle": "^0.9.13",
+        "guzzlehttp/guzzle": "^6.4",
         "sroze/messenger-enqueue-transport": "^0.3.0",
         "symfony/console": "~4.3",
         "symfony/dotenv": "~4.3",
         "symfony/flex": "^1.3.1",
         "symfony/framework-bundle": "~4.3",
         "symfony/messenger": "~4.3",
-        "symfony/yaml": "~4.3"
+        "symfony/yaml": "~4.3",
+        "talkbank/sms-intel": "^1.3"
     },
     "require-dev": {
-        "symfony/phpunit-bridge": "^4.3"
+        "symfony/phpunit-bridge": "^4.3",
+        "squizlabs/php_codesniffer": "3.*"
     },
     "config": {
         "preferred-install": {
@@ -63,5 +66,11 @@
             "allow-contrib": false,
             "require": "4.3.*"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:talkbank-io/sms-intel.git"
+        }
+    ]
 }

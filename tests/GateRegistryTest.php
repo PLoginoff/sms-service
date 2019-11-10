@@ -16,6 +16,7 @@ class GateRegistryTest extends WebTestCase
 
     /**
      * @throws \Exception
+     * @throws \Psr\Cache\InvalidArgumentException
      */
     public function testFakeGate(): void
     {

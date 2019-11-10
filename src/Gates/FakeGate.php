@@ -29,7 +29,7 @@ class FakeGate implements GateInterface, LoggerAwareInterface
 
     public function send($phone, $text): bool
     {
-        file_put_contents($this->log, date(DATE_ATOM). " $phone: $text\n", FILE_APPEND);
+        file_put_contents($this->log, date(DATE_ATOM) . " $phone: $text\n", FILE_APPEND);
         return true;
     }
 }

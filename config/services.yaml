@@ -26,10 +26,32 @@ services:
     App\Service\GateRegistry:
         arguments:
             $gates:
+                intel: '@gate.intel'
+                easy: '@gate.easy'
                 fake: '@gate.fake'
-            $disabled: ['none']
+            $disabled: '%env(csv:SMS_DISABLED)%'
 
     gate.fake:
         class: App\Gates\FakeGate
         arguments:
             $log: '%kernel.logs_dir%/fakegate.log'
+
+    gate.easy:
+        class: App\Gates\EasySms
+        arguments:
+            $login: '%env(SMS_EASY_LOGIN)%'
+            $password: '%env(SMS_EASY_PASSWORD)%'
+            $connectId: '%env(SMS_EASY_CONNECT)%'
+            $smsid: '%env(SMS_ID)%'
+
+    gate.intel:
+        class: App\Gates\SmsIntel
+        arguments:
+            $smsIntel: '@gate.intel.wrapper'
+            $smsid: '%env(SMS_ID)%'
+
+    gate.intel.wrapper:
+        class: TB\Etc\SMSIntel\SmsIntel
+        arguments:
+            $login: '%env(SMS_INTEL_LOGIN)%'
+            $password: '%env(SMS_INTEL_PASSWORD)%'
