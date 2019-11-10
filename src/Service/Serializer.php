@@ -8,12 +8,9 @@ use Symfony\Component\Messenger\Transport\Serialization\SerializerInterface;
 
 /**
  * Class TalkbankSerializer
- * @author xagero
- * @package App\Service\Messenger\Transport\Serialization
  */
 class Serializer implements SerializerInterface
 {
-
     /**
      * Decodes an envelope and its message from an encoded-form.
      *

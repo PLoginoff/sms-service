@@ -1,14 +1,15 @@
 # sms-service
 
-SMS sending service through N gates. Embeds in any messenger broker (via enqueue). At the moment, the following gates:
- - Sms Intel (Russia)
- - Easy Sms (Russia)
- - fake (fake, only log)
+SMS sending service through N gates. Embeds in any messenger broker (via Symfony Messenger & Enqueue).
+At the moment, the following gates:
+ - Sms Intel (Russia);
+ - Easy Sms (Russia);
+ - fake (fake, only log).
+
+Current algorithm:
+  - if it wasn’t possible to send via first gate, then mark it temporarily as a non-working one and take the next one.
 
 See `.env` for possible settings.
-
-Algorithm:
-  - if it wasn’t possible to send via first gate, then mark it temporarily as a non-working one and take the next one
 
 Installing:
  - `composer install`
@@ -25,4 +26,4 @@ Run consumer:
  - `bin/console messenger:consume sms.send -vv`
 
 And send a very simple message to queue `sms.send` from another service:
- - `{"phone": "9260613031", "text": "Hi!"}`  
+ - `{"phone": "9260613031", "text": "Hi!"}`
