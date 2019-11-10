@@ -5,7 +5,7 @@ namespace App\Service;
 use App\Gates\GateInterface;
 use Psr\Cache\CacheItemPoolInterface;
 
-class GateRegistry
+class Registry
 {
     /** @var CacheItemPoolInterface */
     protected $cache;

@@ -29,8 +29,8 @@ class Serializer implements SerializerInterface
      */
     public function decode(array $encodedEnvelope): Envelope
     {
-        $json = json_decode($encodedEnvelope['body']);
-        $message = new SmsSend('phone', 'text');
+        $json = \GuzzleHttp\json_decode($encodedEnvelope['body']);
+        $message = new SmsSend($json->phone, $json->text);
         return new Envelope($message);
     }
 

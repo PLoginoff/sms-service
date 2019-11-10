@@ -7,11 +7,7 @@ framework:
             default_serializer: app.serializer
 
         transports:
-            sms.send: enqueue://default?&queue[name]=sms.send
-            # https://symfony.com/doc/current/messenger.html#transport-configuration
-            # async: '%env(MESSENGER_TRANSPORT_DSN)%'
-            # failed: 'doctrine://default?queue_name=failed'
-            # sync: 'sync://'
+            sms.send: '%env(MESSENGER_TRANSPORT_DSN)%'
 
         routing:
             # Route your messages to the transports

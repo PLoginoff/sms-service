@@ -7,7 +7,7 @@ use Enqueue\MessengerAdapter\Exception\RequeueMessageException;
 use Symfony\Component\Messenger\DependencyInjection\MessengerPass;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Psr\Log\LoggerInterface;
-use App\Service\GateRegistry;
+use App\Service\Registry;
 
 final class Consumer implements MessageHandlerInterface
 {
@@ -16,18 +16,22 @@ final class Consumer implements MessageHandlerInterface
      */
     private $logger;
 
-    /** @var GateRegistry */
+    /** @var Registry */
     private $registry;
 
-    public function __construct(LoggerInterface $logger, GateRegistry $registry)
+    public function __construct(LoggerInterface $logger, Registry $registry)
     {
         $this->logger   = $logger;
         $this->registry = $registry;
     }
 
+    /**
+     * @param SmsSend $smsSend
+     * @throws \Psr\Cache\InvalidArgumentException
+     */
     public function __invoke(SmsSend $smsSend)
     {
-        $gate = $this->registry->select();
+        $gate = $this->registry->get();
 
         if (!$gate) {
             $this->logger->info("We don't have any gate... sleep for 5 minutes");

@@ -2,7 +2,7 @@
 
 namespace App\Command;
 
-use App\Service\GateRegistry;
+use App\Service\Registry;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -25,7 +25,7 @@ class SendCommand extends Command
 
     protected $registry;
 
-    public function __construct(GateRegistry $registry)
+    public function __construct(Registry $registry)
     {
         $this->registry = $registry;
         parent::__construct();
@@ -43,18 +43,13 @@ class SendCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
-        $phone = $input->getArgument('number');
+        $phone    = $input->getArgument('number');
         $message  = $input->getArgument('message');
-        $gate = $this->registry->get($input->getOption('gate'));
+        $gateName = $input->getOption('gate');
 
+        $gate     = $this->registry->get($gateName);
         $io->note("send to $phone via " . $gate->getName());
-
         $status = $gate->send($phone, $message);
-
-        if ($status) {
-            $io->success('SENT!');
-        } else {
-            $io->warning('Error :-(');
-        }
+        $io->success($status ? 'Sent.' : 'Error :-(');
     }
 }

@@ -3,14 +3,14 @@
 namespace App\Tests;
 
 use App\Gates\FakeGate;
-use App\Service\GateRegistry;
+use App\Service\Registry;
 use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class GateRegistryTest extends WebTestCase
+class RegistryTest extends WebTestCase
 {
     /**
-     * @var GateRegistry
+     * @var Registry
      */
     private $service;
 
@@ -40,7 +40,7 @@ class GateRegistryTest extends WebTestCase
     {
         parent::setUp();
         self::bootKernel();
-        $this->service = self::$container->get(GateRegistry::class);
+        $this->service = self::$container->get(Registry::class);
         self::$container->get(CacheItemPoolInterface::class)->clear(); // clear cache for test env
     }
 }

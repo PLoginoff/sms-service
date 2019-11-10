@@ -23,7 +23,7 @@ services:
     app.serializer:
         class: App\Service\Serializer
 
-    App\Service\GateRegistry:
+    App\Service\Registry:
         arguments:
             $gates:
                 intel: '@gate.intel'
